@@ -10,7 +10,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      indx: 5,
+      indx: 99,
       name: [],
       move: [],
       image: [],
@@ -31,7 +31,7 @@ class App extends React.Component {
   componentDidMount() {
       const range = (start, stop, step = 1) =>
       Array(Math.ceil((stop - start) / step)).fill(start).map((x, y) => x + y * step)
-      const indexs = range(0,100)
+      const indexs = range(0,101)
       fetch("https://pokeapi.co/api/v2/pokemon?limit=1000&offset=0")
       .then(response => response.json())
       .then(data => {
