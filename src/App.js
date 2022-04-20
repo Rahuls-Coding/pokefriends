@@ -8,11 +8,12 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      pokemon: [],
+      indx: 0,
       name: [],
       move: [],
       image: [],
-      searchfield: "",
+      weight: [],
+    
     }
   }
 
@@ -23,20 +24,26 @@ class App extends React.Component {
       fetch("https://pokeapi.co/api/v2/pokemon?limit=1000&offset=0")
       .then(response => response.json())
       .then(data => {
+        let names = []
+        let moves = []
+        let images = []
+        let weights = []
         indexs.forEach((i) => { 
-        console.log(data.results[i].url)
+        // console.log(data.results[i].url)
         const url = data.results[i].url
           fetch(url)
           .then(response => response.json())
           .then(data => {
-            this.state.name.push(data.name)
-            this.state.move.push(data.moves[0].move.name)
-            this.state.image.push(data.sprites.front_default)
-            // console.log("Name: " + data.name)
-            // console.log("Move: " + data.moves[0].move.name)
-            // console.log("Image: "+ data.sprites.front_default)
-            // console.log("...")
-            
+            names.push(data.name)
+            moves.push(data.moves[0].move.name)
+            images.push(data.sprites.front_default)
+            weights.push(data.weight)
+            console.log(names)
+            // console.log(this.state.name) 
+            this.setState({name: names})
+            this.setState({move: moves})
+            this.setState({image: images})
+            this.setState({weight: weights})
           })
         })
       })
@@ -46,8 +53,8 @@ class App extends React.Component {
   render() {
     return (
       <div className="App text-center grid justify-items-center items-center h-screen">
-        <Profile image="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png"/>
-        <Card name="Pikachu" move="Lightning-Rod" weight="60"/>
+        <Profile image={this.state.image[this.state.indx]}/>
+        <Card name={this.state.name[this.state.indx]} move={this.state.move[this.state.indx]} weight={this.state.weight[this.state.indx]}/>
       </div>
     );
   }

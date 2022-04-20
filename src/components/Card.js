@@ -7,7 +7,7 @@ const Card = ({image, name, move, weight}) => {
                 <div className=" max-w-sm mx-auto overflow-hidden rounded-xl drop-shadow-lg bg-white border-2 border-sky-500">
                     <div className="px-20 py-8 text-l">
                         <div>
-                            <h2>My Name is <strong>{name}</strong>!</h2>
+                            <h2>My Name is <strong>{name.charAt(0).toUpperCase()+ name.slice(1)}</strong>!</h2>
                         </div>
                     </div>
                 </div>
